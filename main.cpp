@@ -9,6 +9,7 @@
 #include <iostream>
 #include "project1.hpp"
 #include "practice2.hpp"
+#include "project2.hpp"
 
 int main(int argc, const char * argv[])
 {
@@ -17,5 +18,8 @@ int main(int argc, const char * argv[])
     
     p2_3 *p2_3_inst = new p2_3();
     p2_3_inst->init();
+    
+    p2 *p2_inst = new p2();
+    p2_inst->init();
     return 0;
 }
