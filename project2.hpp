@@ -41,7 +41,6 @@ public:
     bool isZero(); 
     void negate();
     
-    
 };
 
 class p2

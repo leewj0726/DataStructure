@@ -10,6 +10,7 @@
 
 p2::p2(){}
 
+
 void p2::init()
 {
     Polynomial a,b,c,d,e;
@@ -57,8 +58,16 @@ void Polynomial::display(char *str)
     
     for(int i = 0; i < degree ; i++)
     {
-        mesg = (boost::format("%5.1f x^%d + ") % coef[i] % (degree-i)).str();
-        std::cout << mesg;
+        if(coef[i] == 1)
+        {
+            mesg = (boost::format("x^%d + ") % (degree-i)).str();
+            std::cout << mesg;
+        }
+        else if (coef[i] != 0)
+        {
+            mesg = (boost::format("%5.1f x^%d + ") % coef[i] % (degree-i)).str();
+            std::cout << mesg;
+        }
     }
     mesg = (boost::format("%4.1f\n") % coef[degree]).str();
     std::cout << mesg;
