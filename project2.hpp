@@ -10,6 +10,9 @@
 #define project2_hpp
 
 #include <cstdio>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
 #define MAX_DEGREE 80 //다항식의 처리 가능한 최대 차수+1
 
 class Polynomial
@@ -27,10 +30,14 @@ public:
     void display(char *str); // 디폴트 매개변수 사용
     void add(Polynomial a, Polynomial b);
     void sub(Polynomial a, Polynomial b);
+    void mul(Polynomial a, Polynomial b);
     
-    bool isZero();
+    float comp(float a, float b);
     
+    void trim();
+    bool isZero(); 
     void negate();
+    
     
 };
 

@@ -12,14 +12,18 @@ p2::p2(){}
 
 void p2::init()
 {
-    Polynomial a,b,c;
+    Polynomial a,b,c,d,e;
     a.read();
     b.read();
-    c.sub(a, b);
+    c.add(a, b);
+    d.sub(a, b);
+    e.mul(a, b);
     
     a.display("A = ");
     b.display("B = ");
     c.display("A+B=");
+    d.display("A-B=");
+    e.display("A*B=");
 }
 
 Polynomial::Polynomial()
@@ -69,6 +73,21 @@ void Polynomial::add(Polynomial a, Polynomial b)
     }
 }
 
+float Polynomial::comp(float a, float b) // sub 기능을 위한 값 크기 비교 함수
+{
+    float tmp_result;
+    if (a >= b)
+    {
+        tmp_result = (a - b);
+        return tmp_result;
+    }
+    else
+    {
+        tmp_result = (b - a);
+        return tmp_result;
+    }
+}
+
 void Polynomial::sub(Polynomial a, Polynomial b)
 {
     if(a.degree > b.degree)
@@ -76,7 +95,8 @@ void Polynomial::sub(Polynomial a, Polynomial b)
         *this = a;
         for (int i = 0; i<=b.degree; i++)
         {
-            coef[i+(degree-b.degree)] -= b.coef[i];
+            coef[i+(degree-b.degree)] = comp(coef[i+(degree-b.degree)], b.coef[i]);
+            //coef[i+(degree-b.degree)] -= b.coef[i];
         }
     }
     else
@@ -84,9 +104,57 @@ void Polynomial::sub(Polynomial a, Polynomial b)
         *this = b;
         for (int i = 0; i<=a.degree; i++)
         {
-            coef[i+(degree-a.degree)] -= a.coef[i];
+            coef[i+(degree-a.degree)] = comp(coef[i+(degree-a.degree)], a.coef[i]);
+            //coef[i+(degree-a.degree)] -= a.coef[i];
         }
     }
+    
+    trim();
+}
+
+void Polynomial::mul(Polynomial a, Polynomial b)
+{
+    if(a.degree > b.degree)
+    {
+        *this = a;
+        for (int i = 0; i<=b.degree; i++)
+        {
+            coef[i+(degree-b.degree)] *= b.coef[i];
+        }
+    }
+    else
+    {
+        *this = b;
+        for (int i = 0; i<=a.degree; i++)
+        {
+            coef[i+(degree-a.degree)] *= a.coef[i];
+        }
+    }
+}
+
+void Polynomial::trim()
+{
+    int not_zero_pos = 0; // 높은 차수부터 루프를 돌며 A와 B의 차수가 0이 아닌 값이 나오는 차수를 저장하기 위한 공간
+    for(int i = degree; i >= 0; i-- )
+    {
+        if(coef[i] != 0)
+        {
+            not_zero_pos = (degree - i); //차수가 0이 아니면 해당 차수를 저장 하고 루프를 끝냄
+            break;
+        }
+    }
+    
+    float tmp_coef[not_zero_pos+1]; // A와 B의 차가 0이 아닌 차수만큼의 메모리 공간을 만듦
+    
+    int j = 0;
+    degree = not_zero_pos; // 현재의 객체의 차수 값에 0이 아닌 차수를 덮어씌워 저장해둠
+    for (int i = degree; i >= 0; i--) //
+    {
+        tmp_coef[j] = coef[i];
+        j++;
+    }
+    
+    memcpy(coef,tmp_coef,sizeof(tmp_coef));
 }
 
 bool Polynomial::isZero()
