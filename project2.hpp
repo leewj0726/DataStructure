@@ -11,8 +11,11 @@
 
 #include <cstdio>
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <iostream>
+
+#include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 #define MAX_DEGREE 80 //다항식의 처리 가능한 최대 차수+1
 
 class Polynomial

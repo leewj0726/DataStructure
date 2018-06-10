@@ -33,9 +33,14 @@ Polynomial::Polynomial()
 
 void Polynomial::read()
 {
-    printf("다항식의 최고 차수를 입력하십시오");
+    std::string mesg;
+    
+    mesg = (boost::format("%s") % "다항식 최고 차수를 입력하십시오.").str();
+    std::cout << mesg;
     scanf("%d", &degree);
-    printf("각 항의 계수를 입력하시오");
+    
+    mesg = (boost::format("%s") % "각 항의 계수를 입력하시오").str();
+    std::cout << mesg;
     
     for(int i=0 ; i<=degree ; i++)
     {
@@ -45,12 +50,18 @@ void Polynomial::read()
 
 void Polynomial::display(char *str)
 {
-    printf("\t%s", str);
+    std::string mesg;
+    
+    mesg = (boost::format("\t%s") % str).str();
+    std::cout << mesg;
+    
     for(int i = 0; i < degree ; i++)
     {
-        printf("%5.1f x^%d + ", coef[i], degree-i);
+        mesg = (boost::format("%5.1f x^%d + ") % coef[i] % (degree-i)).str();
+        std::cout << mesg;
     }
-    printf("%4.1f\n", coef[degree]);
+    mesg = (boost::format("%4.1f\n") % coef[degree]).str();
+    std::cout << mesg;
 }
 
 void Polynomial::add(Polynomial a, Polynomial b)
