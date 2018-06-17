@@ -10,16 +10,20 @@
 #include "project1.hpp"
 #include "practice2.hpp"
 #include "project2.hpp"
+#include "project3.hpp"
 
 int main(int argc, const char * argv[])
 {
-    p1 *p1_inst = new p1(2000);
-    p1_inst->init();
+//    p1 *p1_inst = new p1(2000);
+//    p1_inst->init();
+//    
+//    p2_3 *p2_3_inst = new p2_3();
+//    p2_3_inst->init();
+//    
+//    p2 *p2_inst = new p2();
+//    p2_inst->init();
     
-    p2_3 *p2_3_inst = new p2_3();
-    p2_3_inst->init();
-    
-    p2 *p2_inst = new p2();
-    p2_inst->init();
+    p3 *p3_inst = new p3();
+    p3_inst->init();
     return 0;
 }
